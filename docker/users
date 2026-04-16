@@ -1,0 +1,10 @@
+# FreeRADIUS users file — raas-onboarding curriculum
+# Mount into container at: /etc/freeradius/3.0/users
+#
+# Format:
+#   username    Cleartext-Password := "password"
+#               Reply-Message = "greeting"
+#
+# Topic 2 test user
+testuser	Cleartext-Password := "testpass"
+		Reply-Message = "Hello from FreeRADIUS!"

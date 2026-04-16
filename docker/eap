@@ -1,0 +1,42 @@
+# FreeRADIUS EAP module configuration
+# Mount at: /etc/freeradius/3.0/mods-enabled/eap
+# Overrides the default to point at our Topic 3 certs
+
+eap {
+    default_eap_type = ttls
+    timer_expire     = 60
+    ignore_unknown_eap_types = no
+    cisco_accounting_username_bug = no
+
+    tls-config tls-common {
+        private_key_file   = /etc/freeradius/certs/server.key
+        certificate_file   = /etc/freeradius/certs/server.pem
+        CA_file            = /etc/freeradius/certs/ca.pem
+        dh_file            = /etc/freeradius/certs/dh
+        cipher_list        = "DEFAULT"
+        tls_min_version    = "1.2"
+        ecdh_curve         = "prime256v1"
+
+        cache {
+            enable = no
+        }
+
+        verify {
+            client              = yes
+            check_cert_cn       = no
+            check_cert_issuer   = no
+        }
+    }
+
+    tls {
+        tls = tls-common
+    }
+
+    ttls {
+        tls                    = tls-common
+        default_eap_type       = md5
+        copy_request_to_tunnel = yes
+        use_tunneled_reply     = yes
+        virtual_server         = "inner-tunnel"
+    }
+}
