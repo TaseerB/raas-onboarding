@@ -1,0 +1,8 @@
+# Flyway migrations live here.
+# Naming convention: V{n}__{snake_case_description}.sql
+# Example: V1__create_radius_users.sql
+#
+# Rules (from .instructions.md):
+#   - Every table must have: id, created_at, updated_at
+#   - Use standard SQL99 syntax (H2-compatible for tests)
+#   - Never edit an applied migration — add a new version instead

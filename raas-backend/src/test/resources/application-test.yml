@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:raas_test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  # Disable JWT validation for tests — use @WithMockUser instead
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ""
+
+logging:
+  level:
+    com.raas: DEBUG
+    org.hibernate.SQL: DEBUG
