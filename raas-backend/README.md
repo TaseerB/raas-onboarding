@@ -10,33 +10,38 @@ RadSec tunnels, EAP profiles).
 
 | Tool | Version | Install |
 |------|---------|---------|
-| Java | 17 | `brew install openjdk@17` |
+| Java | 25 (LTS) | `brew install openjdk` |
 | Maven | 3.9+ | `brew install maven` |
 | Docker Desktop | Latest | [docker.com](https://www.docker.com/products/docker-desktop/) |
 
 ---
 
-## Java 17 Setup (Required)
+## Java 25 Setup
 
-Maven defaults to the system Java, which on this machine is **Java 25** (Homebrew
-`openjdk`). Java 25 breaks Lombok annotation processing. You must point Maven at
-Java 17 before running any `mvn` command.
+The project requires **Java 25 LTS** (Homebrew `openjdk`).
 
-**Option A — Export in your current shell session (quickest):**
+**Install (if not already present):**
 ```bash
-export JAVA_HOME=/opt/homebrew/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home
+brew install openjdk
 ```
 
-**Option B — Add to `~/.zshrc` to make it permanent:**
+**Point Maven at Java 25:**
+
+Option A — Export in your current shell session:
 ```bash
-echo 'export JAVA_HOME=/opt/homebrew/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home' >> ~/.zshrc
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home
+```
+
+Option B — Add to `~/.zshrc` to make it permanent:
+```bash
+echo 'export JAVA_HOME=/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home' >> ~/.zshrc
 source ~/.zshrc
 ```
 
 Verify:
 ```bash
 java -version
-# openjdk version "17.0.x"
+# openjdk version "25.0.2"
 ```
 
 ---
@@ -73,7 +78,7 @@ Flyway runs migrations automatically on startup — no manual DB setup needed.
 
 ```bash
 # From raas-backend/
-export JAVA_HOME=/opt/homebrew/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home
 
 mvn spring-boot:run
 ```
@@ -93,7 +98,7 @@ Started RaasApplication in X.XXX seconds
 Tests use an **in-memory H2 database** — no running Postgres or Docker required.
 
 ```bash
-export JAVA_HOME=/opt/homebrew/Cellar/openjdk@17/17.0.18/libexec/openjdk.jdk/Contents/Home
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home
 
 mvn test
 ```
