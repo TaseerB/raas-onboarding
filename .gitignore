@@ -1,0 +1,27 @@
+# Maven build output
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Compiled bytecode
+*.class
+
+# Packaged artifacts
+*.jar
+*.war
+*.ear
+*.nar
+
+# IDE files
+.idea/
+*.iml
+.eclipse/
+.settings/
+.classpath
+.project
+
+# Log files
+*.log
+
+# macOS metadata
+.DS_Store
