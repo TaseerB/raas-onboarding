@@ -1,21 +1,25 @@
 # FreeRADIUS clients.conf — raas-onboarding curriculum
 # Mount at: /etc/freeradius/3.0/clients.conf
 #
+# SETUP: Copy this file to docker/clients.conf and set a strong secret.
+#   cp docker/clients.conf.example docker/clients.conf
+#   (docker/clients.conf is gitignored — never commit real secrets)
+#
 # On Mac + Docker Desktop, packets from the host arrive at the container
 # sourced from 192.168.65.1 (Docker Desktop VM bridge gateway), not 127.0.0.1.
 # Both ranges are listed here for local lab use.
 
 client localhost {
     ipaddr          = 127.0.0.1
-    secret          = testing123
-    require_message_authenticator = no
+    secret          = CHANGE_ME_STRONG_SECRET
+    require_message_authenticator = yes
     nas_type        = other
 }
 
 # Docker Desktop host-gateway (Mac → container via VM bridge)
 client docker_desktop_gw {
     ipaddr          = 192.168.65.0/24
-    secret          = testing123
-    require_message_authenticator = no
+    secret          = CHANGE_ME_STRONG_SECRET
+    require_message_authenticator = yes
     nas_type        = other
 }

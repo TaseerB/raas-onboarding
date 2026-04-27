@@ -11,6 +11,18 @@ IMAGE="freeradius/freeradius-server:latest"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
 
+# Guard: ensure gitignored config files have been set up from their .example templates
+if [[ ! -f "$SCRIPT_DIR/users" ]]; then
+  echo "ERROR: docker/users not found. Run: cp docker/users.example docker/users"
+  echo "       Then set a real password (never commit the users file)."
+  exit 1
+fi
+if [[ ! -f "$SCRIPT_DIR/clients.conf" ]]; then
+  echo "ERROR: docker/clients.conf not found. Run: cp docker/clients.conf.example docker/clients.conf"
+  echo "       Then replace CHANGE_ME_STRONG_SECRET with a real secret (never commit clients.conf)."
+  exit 1
+fi
+
 # Clean up any existing container with the same name
 docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
 

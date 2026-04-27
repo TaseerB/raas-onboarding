@@ -3,15 +3,15 @@ services:
     image: postgres:16-alpine
     container_name: raas-postgres
     environment:
-      POSTGRES_DB: raas
-      POSTGRES_USER: raas
-      POSTGRES_PASSWORD: raas
+      POSTGRES_DB: ${DB_NAME:-raas}
+      POSTGRES_USER: ${DB_USER:-raas}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set in .env}
     ports:
       - "5432:5432"
     volumes:
       - raas_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U raas -d raas"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-raas} -d ${DB_NAME:-raas}"]
       interval: 10s
       timeout: 5s
       retries: 5

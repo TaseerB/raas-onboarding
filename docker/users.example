@@ -1,0 +1,14 @@
+# FreeRADIUS users file — raas-onboarding curriculum
+# Mount into container at: /etc/freeradius/3.0/users
+#
+# SETUP: Copy this file to docker/users and set real values.
+#   cp docker/users.example docker/users
+#   (docker/users is gitignored — never commit real credentials)
+#
+# Format:
+#   username    Cleartext-Password := "password"
+#               Reply-Message = "greeting"
+#
+# Topic 2 test user — replace password before use
+testuser	Cleartext-Password := "CHANGE_ME"
+		Reply-Message = "Hello from FreeRADIUS!"

@@ -25,3 +25,41 @@ target/
 
 # macOS metadata
 .DS_Store
+
+# ============================================================
+# SECURITY — NEVER COMMIT PRIVATE KEYS OR SENSITIVE MATERIAL
+# ============================================================
+
+# Private keys (CA, server, client)
+*.key
+
+# Certificate signing requests (contain private key metadata)
+*.csr
+
+# PKCS#12 / PFX bundles (contain private key)
+*.p12
+*.pfx
+
+# Java keystores
+*.jks
+*.keystore
+
+# PEM bundles that may embed a private key
+# (Public certs *.crt and *.pem are tracked intentionally for lab use;
+#  remove the next two lines if you also want to exclude them)
+# *.crt
+# *.pem
+
+# Diffie-Hellman parameters (not secret but large/generated)
+# dh
+
+# Docker / environment secret files
+.env
+.env.*
+!.env.example
+
+# FreeRADIUS users flat-file (contains test credentials)
+docker/users
+
+# FreeRADIUS clients.conf (contains shared secrets)
+docker/clients.conf
